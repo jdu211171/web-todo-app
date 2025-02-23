@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+/.cache
+/build
+.env
+.idea
+src/components/ui/*
