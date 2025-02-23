@@ -17,7 +17,7 @@ function Navbar() {
 	}
 
 	useEffect(() => {
-		document.body.classList = ' '
+		document.body.classList.remove('dark-mode', 'light')
 		document.body.classList.add(theme)
 		localStorage.setItem('darkMode', theme)
 	}, [theme])

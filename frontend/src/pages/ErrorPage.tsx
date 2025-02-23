@@ -1,28 +1,21 @@
-//react-router-dom
-import { Link, useRouteError } from 'react-router'
+import { Link } from 'react-router'
 
 function ErrorPage() {
 	return (
-		<div className='error-container container'>
-			<div>
-				<h3>404 Page Not Found</h3>
-			</div>
+		<div className='flex flex-col gap-6 h-screen justify-center items-center'>
+			<h1>
+				<span className='block font-light'>Requested Page</span>
+				<span className='block'>Can't Be Found</span>
+			</h1>
+			<span className='text-[20px] font-normal italic text-gray-navy'>
+				Return to the home page and try again.
+			</span>
+
 			<Link to='/' className='btn'>
-				Go to home
+				Back To Home
 			</Link>
 		</div>
 	)
 }
-
-//return (
-//	<div className='error-container container'>
-//		<div>
-//			<h3>Oops! Something went wrong</h3>
-//		</div>
-//		<Link to='/' className='btn'>
-//			Go to home
-//		</Link>
-//	</div>
-//)
 
 export default ErrorPage
