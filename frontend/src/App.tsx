@@ -3,6 +3,7 @@ import MainLayout from './layouts/MainLayout'
 import ErrorPage from './pages/ErrorPage'
 import Home from './pages/Home'
 import { createBrowserRouter, RouterProvider } from 'react-router'
+import Login from './pages/Login'
 
 interface RouteConfig {
 	path: string
@@ -21,6 +22,10 @@ function App() {
 				{
 					path: '',
 					element: <Home />,
+				},
+				{
+					path: 'login',
+					element: <Login />,
 				},
 			],
 		},
