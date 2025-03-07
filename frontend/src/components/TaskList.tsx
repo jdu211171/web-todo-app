@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Task, TaskFilter } from '../types/task';
 import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
@@ -13,6 +13,34 @@ const TaskList: React.FC = () => {
 	const [filter, setFilter] = useState<TaskFilter>({});
 	const [notification, setNotification] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
 
+	const formContainerRef = useRef<HTMLDivElement>(null);
+
+	// Update CSS variable for form height to adjust scrollable area
+	useEffect(() => {
+		const updateFormHeight = () => {
+			if (showForm && formContainerRef.current) {
+				const formHeight = formContainerRef.current.offsetHeight;
+				document.documentElement.style.setProperty('--form-container-height', `${formHeight}px`);
+			} else {
+				document.documentElement.style.setProperty('--form-container-height', '0px');
+			}
+		};
+
+		// Initial update
+		updateFormHeight();
+
+		// Update after a small delay to ensure DOM is updated
+		const timeoutId = setTimeout(updateFormHeight, 50);
+
+		// Update on window resize
+		window.addEventListener('resize', updateFormHeight);
+
+		return () => {
+			window.removeEventListener('resize', updateFormHeight);
+			clearTimeout(timeoutId);
+		};
+	}, [showForm]);
+
 	// Fetch tasks
 	const fetchTasks = async () => {
 		try {
@@ -21,7 +49,7 @@ const TaskList: React.FC = () => {
 			setTasks(data);
 			setError(null);
 		} catch (err) {
-			setError('Failed to fetch tasks. Please try again.');
+			setError('タスクの取得に失敗しました。もう一度お試しください。');
 			console.error(err);
 		} finally {
 			setLoading(false);
@@ -45,31 +73,31 @@ const TaskList: React.FC = () => {
 			if (editingTask && editingTask.id) {
 				// Update existing task
 				await TaskService.updateTask(editingTask.id, task);
-				showNotification('Task updated successfully!', 'success');
+				showNotification('タスクが正常に更新されました！', 'success');
 			} else {
 				// Create new task
 				await TaskService.createTask(task);
-				showNotification('Task created successfully!', 'success');
+				showNotification('タスクが正常に作成されました！', 'success');
 			}
 
 			setShowForm(false);
 			setEditingTask(null);
 			fetchTasks();
 		} catch (err) {
-			showNotification('Failed to save task. Please try again.', 'error');
+			showNotification('タスクの保存に失敗しました。もう一度お試しください。', 'error');
 			console.error(err);
 		}
 	};
 
 	// Handle task deletion
 	const handleDelete = async (id: number) => {
-		if (window.confirm('Are you sure you want to delete this task?')) {
+		if (window.confirm('このタスクを削除してもよろしいですか？')) {
 			try {
 				await TaskService.deleteTask(id);
-				showNotification('Task deleted successfully!', 'success');
+				showNotification('タスクが正常に削除されました！', 'success');
 				fetchTasks();
 			} catch (err) {
-				showNotification('Failed to delete task. Please try again.', 'error');
+				showNotification('タスクの削除に失敗しました。もう一度お試しください。', 'error');
 				console.error(err);
 			}
 		}
@@ -85,10 +113,11 @@ const TaskList: React.FC = () => {
 	const handleToggleStatus = async (id: number, status: 'Incomplete' | 'Completed') => {
 		try {
 			await TaskService.updateTask(id, { status });
-			showNotification(`Task marked as ${status}!`, 'success');
+			const statusText = status === 'Completed' ? '完了' : '未完了';
+			showNotification(`タスクを${statusText}に設定しました！`, 'success');
 			fetchTasks();
 		} catch (err) {
-			showNotification('Failed to update task status. Please try again.', 'error');
+			showNotification('タスクの状態の更新に失敗しました。もう一度お試しください。', 'error');
 			console.error(err);
 		}
 	};
@@ -114,16 +143,16 @@ const TaskList: React.FC = () => {
 			{/* Task filters */}
 			<div className="task-filters">
 				<div className="filter-control">
-					<label htmlFor="status-filter">Filter by Status:</label>
+					<label htmlFor="status-filter">ステータスでフィルター:</label>
 					<select
 						id="status-filter"
 						name="status"
 						value={filter.status || 'all'}
 						onChange={handleFilterChange}
 					>
-						<option value="all">All</option>
-						<option value="Incomplete">Incomplete</option>
-						<option value="Completed">Completed</option>
+						<option value="all">すべて</option>
+						<option value="Incomplete">未完了</option>
+						<option value="Completed">完了</option>
 					</select>
 				</div>
 
@@ -131,14 +160,14 @@ const TaskList: React.FC = () => {
 					setEditingTask(null);
 					setShowForm(true);
 				}}>
-					Add New Task
+					新しいタスクを追加
 				</button>
 			</div>
 
 			{/* Task form */}
 			{showForm && (
-				<div className="task-form-container">
-					<h2>{editingTask ? 'Edit Task' : 'Add New Task'}</h2>
+				<div className="task-form-container" ref={formContainerRef}>
+					<h2>{editingTask ? 'タスクを編集' : '新しいタスクを追加'}</h2>
 					<TaskForm
 						task={editingTask || undefined}
 						onSubmit={handleSubmit}
@@ -152,13 +181,13 @@ const TaskList: React.FC = () => {
 
 			{/* Task list */}
 			<div className="tasks">
-				<h2>Tasks {loading && '(Loading...)'}</h2>
+				<h2 className="task-list-label">タスク一覧 {loading && '(読み込み中...)'}</h2>
 
 				{error && <div className="error-message">{error}</div>}
 
 				{!loading && tasks.length === 0 && (
 					<div className="empty-state">
-						<p>No tasks found. Add your first task!</p>
+						<p>タスクが見つかりません。最初のタスクを追加してください！</p>
 					</div>
 				)}
 

@@ -38,7 +38,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
 		const newErrors: { [key: string]: string } = {};
 
 		if (!formData.name.trim()) {
-			newErrors.name = 'Task name is required';
+			newErrors.name = 'タスク名は必須です';
 		}
 
 		// Validate due date is not in the past
@@ -48,7 +48,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
 			today.setHours(0, 0, 0, 0);
 
 			if (dueDate < today) {
-				newErrors.due_date = 'Due date cannot be in the past';
+				newErrors.due_date = '過去の日付は設定できません';
 			}
 		}
 
@@ -67,33 +67,33 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
 	return (
 		<form className="task-form" onSubmit={handleSubmit}>
 			<div className="form-group">
-				<label htmlFor="name">Task Name*</label>
+				<label htmlFor="name">タスク名*</label>
 				<input
 					type="text"
 					id="name"
 					name="name"
 					value={formData.name}
 					onChange={handleChange}
-					placeholder="Enter task name"
+					placeholder="タスク名を入力"
 					className={errors.name ? 'error' : ''}
 				/>
 				{errors.name && <div className="error-message">{errors.name}</div>}
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="description">Description</label>
+				<label htmlFor="description">説明</label>
 				<textarea
 					id="description"
 					name="description"
 					value={formData.description || ''}
 					onChange={handleChange}
-					placeholder="Enter task description (optional)"
+					placeholder="タスクの説明を入力（任意）"
 					rows={3}
 				/>
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="due_date">Due Date</label>
+				<label htmlFor="due_date">期限日</label>
 				<input
 					type="date"
 					id="due_date"
@@ -106,24 +106,24 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSubmit, onCancel }) => {
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="status">Status</label>
+				<label htmlFor="status">ステータス</label>
 				<select
 					id="status"
 					name="status"
 					value={formData.status}
 					onChange={handleChange}
 				>
-					<option value="Incomplete">Incomplete</option>
-					<option value="Completed">Completed</option>
+					<option value="Incomplete">未完了</option>
+					<option value="Completed">完了</option>
 				</select>
 			</div>
 
 			<div className="form-actions">
 				<button type="submit" className="submit-btn">
-					{task ? 'Update Task' : 'Add Task'}
+					{task ? 'タスクを更新' : 'タスクを追加'}
 				</button>
 				<button type="button" className="cancel-btn" onClick={onCancel}>
-					Cancel
+					キャンセル
 				</button>
 			</div>
 		</form>

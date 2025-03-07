@@ -13,8 +13,11 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onEdit, onToggleSta
 
 	// Format date for display
 	const formattedDate = due_date
-		? new Date(due_date).toLocaleDateString()
-		: 'No due date';
+		? new Date(due_date).toLocaleDateString('ja-JP')
+		: '期限なし';
+
+	// Translate status
+	const statusText = status === 'Completed' ? '完了' : '未完了';
 
 	return (
 		<div className={`task-item ${status === 'Completed' ? 'completed' : ''}`}>
@@ -23,7 +26,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onEdit, onToggleSta
 					<h3>{name}</h3>
 					<div className="task-status">
             <span className={`status-badge ${status === 'Completed' ? 'completed' : 'incomplete'}`}>
-              {status}
+              {statusText}
             </span>
 					</div>
 				</div>
@@ -35,7 +38,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onEdit, onToggleSta
 				)}
 
 				<div className="task-details">
-					<span className="due-date">Due: {formattedDate}</span>
+					<span className="due-date">期限: {formattedDate}</span>
 				</div>
 			</div>
 
@@ -47,13 +50,13 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onEdit, onToggleSta
 						status === 'Completed' ? 'Incomplete' : 'Completed'
 					)}
 				>
-					{status === 'Completed' ? 'Mark Incomplete' : 'Mark Complete'}
+					{status === 'Completed' ? '未完了にする' : '完了にする'}
 				</button>
 				<button className="edit-btn" onClick={() => onEdit(task)}>
-					Edit
+					編集
 				</button>
 				<button className="delete-btn" onClick={() => onDelete(id as number)}>
-					Delete
+					削除
 				</button>
 			</div>
 		</div>
