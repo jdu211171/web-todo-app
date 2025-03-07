@@ -1,99 +1,99 @@
-# Task Management App
+# タスク管理アプリ
 
-A simple, minimalist task management application that allows users to create, read, update, and delete tasks. This project was developed as part of an assignment.
+シンプルでミニマリストなタスク管理アプリケーションで、ユーザーはタスクの作成、閲覧、更新、削除ができます。このプロジェクトは課題の一部として開発されました。
 
-## Features
+## 機能
 
-- Create new tasks with name, description, due date, and status
-- View a list of all tasks with filtering options
-- Edit existing tasks
-- Delete tasks
-- Mark tasks as complete/incomplete
-- Persistent storage using SQLite
-- Responsive design that works on both desktop and mobile devices
+- タスク名、説明、期限日、ステータスを含む新しいタスクの作成
+- フィルタリングオプション付きのタスク一覧表示
+- 既存タスクの編集
+- タスクの削除
+- タスクの完了/未完了の切り替え
+- SQLiteを使用した永続的なデータ保存
+- デスクトップとモバイルデバイスの両方で動作するレスポンシブデザイン
 
-## Technology Stack
+## 技術スタック
 
-- **Frontend**: React, TypeScript
-- **Backend**: Express.js, Node.js, TypeScript
-- **Database**: SQLite
-- **Version Control**: Git, GitHub
+- **フロントエンド**: React, TypeScript
+- **バックエンド**: Express.js, Node.js, TypeScript
+- **データベース**: SQLite
+- **バージョン管理**: Git, GitHub
 
-## Setup Instructions
+## セットアップ手順
 
-### Prerequisites
+### 前提条件
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- Node.js (v14以上)
+- npm (v6以上)
 
-### Installation
+### インストール
 
-1. Clone the repository:
+1. リポジトリをクローンする:
    ```
    git clone https://github.com/yourusername/task-management-app.git
    cd task-management-app
    ```
 
-2. Install server dependencies:
+2. サーバーの依存関係をインストールする:
    ```
    cd server
    npm install
    ```
 
-3. Install client dependencies:
+3. クライアントの依存関係をインストールする:
    ```
    cd ../client
    npm install
    ```
 
-### Running the Application
+### アプリケーションの実行
 
-1. Start the backend server:
+1. バックエンドサーバーを起動する:
    ```
    cd server
    npm run dev
    ```
-   The server will run on http://localhost:5000
+   サーバーは http://localhost:5000 で実行されます
 
-2. In a separate terminal, start the frontend:
+2. 別のターミナルで、フロントエンドを起動する:
    ```
    cd client
    npm start
    ```
-   The client will run on http://localhost:3000
+   クライアントは http://localhost:3000 で実行されます
 
-3. Open your browser and navigate to http://localhost:3000 to use the application
+3. ブラウザを開いて http://localhost:3000 にアクセスし、アプリケーションを使用します
 
-## API Endpoints
+## APIエンドポイント
 
-- `GET /api/tasks` - Get all tasks (with optional filters)
-- `GET /api/tasks/:id` - Get a specific task by ID
-- `POST /api/tasks` - Create a new task
-- `PUT /api/tasks/:id` - Update an existing task
-- `DELETE /api/tasks/:id` - Delete a task
+- `GET /api/tasks` - すべてのタスクを取得する（オプションのフィルタ付き）
+- `GET /api/tasks/:id` - IDで特定のタスクを取得する
+- `POST /api/tasks` - 新しいタスクを作成する
+- `PUT /api/tasks/:id` - 既存のタスクを更新する
+- `DELETE /api/tasks/:id` - タスクを削除する
 
-## Project Structure
+## プロジェクト構造
 
 ```
 task-management-app/
-├── client/                 # Frontend - React + TypeScript
-│   ├── public/             # Static files
-│   ├── src/                # Source code
-│   │   ├── components/     # React components
-│   │   ├── services/       # API service calls
-│   │   ├── types/          # TypeScript interfaces
-│   │   ├── App.tsx         # Main App component
-│   │   └── index.tsx       # Entry point
+├── client/                 # フロントエンド - React + TypeScript
+│   ├── public/             # 静的ファイル
+│   ├── src/                # ソースコード
+│   │   ├── components/     # Reactコンポーネント
+│   │   ├── services/       # APIサービスコール
+│   │   ├── types/          # TypeScriptインターフェース
+│   │   ├── App.tsx         # メインAppコンポーネント
+│   │   └── index.tsx       # エントリーポイント
 │
-├── server/                 # Backend - Express + TypeScript
-│   ├── src/                # Source code
-│   │   ├── controllers/    # Request handlers
-│   │   ├── models/         # Database models
-│   │   ├── routes/         # API routes
-│   │   ├── db/             # Database setup
-│   │   ├── types/          # TypeScript interfaces
-│   │   ├── app.ts          # Express app setup
-│   │   └── server.ts       # Server entry point
+├── server/                 # バックエンド - Express + TypeScript
+│   ├── src/                # ソースコード
+│   │   ├── controllers/    # リクエストハンドラー
+│   │   ├── models/         # データベースモデル
+│   │   ├── routes/         # APIルート
+│   │   ├── db/             # データベースセットアップ
+│   │   ├── types/          # TypeScriptインターフェース
+│   │   ├── app.ts          # Expressアプリセットアップ
+│   │   └── server.ts       # サーバーエントリーポイント
 │
 ├── .gitignore
 └── README.md
