@@ -31,8 +31,7 @@
 1. リポジトリをクローンする:
    ```
    git clone https://github.com/jdu211171/web-todo-app.git
-   cd task-management-app
-   git checkout dev
+   cd web-todo-app
    ```
 
 2. サーバーの依存関係をインストールする:
