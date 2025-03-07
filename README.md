@@ -32,6 +32,7 @@
    ```
    git clone https://github.com/jdu211171/web-todo-app.git
    cd web-todo-app
+   git checkout dev
    ```
 
 2. サーバーの依存関係をインストールする:
