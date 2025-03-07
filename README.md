@@ -30,19 +30,20 @@
 
 1. リポジトリをクローンする:
    ```
-   git clone https://github.com/yourusername/task-management-app.git
+   git clone https://github.com/jdu211171/web-todo-app.git
    cd task-management-app
+   git checkout dev
    ```
 
 2. サーバーの依存関係をインストールする:
    ```
-   cd server
+   cd backend
    npm install
    ```
 
 3. クライアントの依存関係をインストールする:
    ```
-   cd ../client
+   cd ../frontend
    npm install
    ```
 
@@ -50,14 +51,14 @@
 
 1. バックエンドサーバーを起動する:
    ```
-   cd server
+   cd backend
    npm run dev
    ```
    サーバーは http://localhost:5000 で実行されます
 
 2. 別のターミナルで、フロントエンドを起動する:
    ```
-   cd client
+   cd frontend
    npm start
    ```
    クライアントは http://localhost:3000 で実行されます
@@ -75,8 +76,8 @@
 ## プロジェクト構造
 
 ```
-task-management-app/
-├── client/                 # フロントエンド - React + TypeScript
+web-todo-app/
+├── frontend/                 # フロントエンド - React + TypeScript
 │   ├── public/             # 静的ファイル
 │   ├── src/                # ソースコード
 │   │   ├── components/     # Reactコンポーネント
@@ -85,7 +86,7 @@ task-management-app/
 │   │   ├── App.tsx         # メインAppコンポーネント
 │   │   └── index.tsx       # エントリーポイント
 │
-├── server/                 # バックエンド - Express + TypeScript
+├── backend/                 # バックエンド - Express + TypeScript
 │   ├── src/                # ソースコード
 │   │   ├── controllers/    # リクエストハンドラー
 │   │   ├── models/         # データベースモデル
