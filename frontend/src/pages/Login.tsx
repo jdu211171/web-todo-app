@@ -1,7 +1,9 @@
+import Button from '@/components/Button.tsx'
+
 function Login() {
 	return (
 		<div>
-			<p>Login</p>
+			<Button>Login</Button>
 		</div>
 	)
 }

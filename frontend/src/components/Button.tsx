@@ -1,29 +1,30 @@
-import { PartyPopperIcon as Party } from 'lucide-react'
-import { useState } from 'react'
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	children: React.ReactNode
+	variant?: 'primary' | 'secondary'
+	className?: string
+}
 
-export default function ConfirmButton() {
-	const [isDark, setIsDark] = useState(false)
-
+function Button({ children, className = '', ...props }: ButtonProps) {
 	return (
-		<div className='flex gap-4 p-4'>
 			<button
-				onClick={() => setIsDark(!isDark)}
 				className={`
-          inline-flex items-center gap-2 px-6 py-3 
-          rounded-xl text-base font-medium
-          transition-colors duration-200
-          ${
-						isDark
-							? 'bg-[#313E51] text-white hover:bg-[#313E51]/90'
-							: 'bg-white text-[#313E51] hover:bg-white/90 shadow-md'
-					}
-        `}
+        bg-[#a729f5] text-white 
+        rounded-[24px] px-16 py-8 
+        text-[28px] leading-none
+        font-medium font-[Rubik]
+        cursor-pointer capitalize
+        hover:bg-[#a729f5]/50
+        dark:text-white
+        max-[500px]:text-[18px] 
+        max-[500px]:py-[19px] max-[500px]:px-[19px]
+        max-[500px]:rounded-[12px]
+        ${className}
+	      `}
+				{...props}
 			>
-				<Party
-					className={`w-4 h-4 ${!isDark ? 'text-blue-500' : 'text-white'}`}
-				/>
-				Confirm
+				{children}
 			</button>
-		</div>
 	)
 }
+
+export default Button

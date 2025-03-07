@@ -24,7 +24,7 @@ function Navbar() {
 
 	return (
 		<header className='header'>
-			<div className='header-container container'>
+			<div className='flex justify-between align-center'>
 				<div>
 					{title && (
 						<Link to='/' className='header-logo'>
